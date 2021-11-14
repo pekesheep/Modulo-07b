@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+}
+
+#title {
+    text-align: center;
+}
+
+div{
+    margin: 10px;
+}
+.jusified-box {
+    text-align: center;
+    margin: auto;
+    width: 50%;
+}
+
+input[type=number] {
+    /* Estilo de texto de input */
+    font-size: 24px;
+    text-align: center;
+    /* Estilo de caja input */
+    width: 5%;
+    justify-content: center;
+    align-items: center;
+     border: solid 1px gray;
+}
+
+input[type=number]:focus {
+    border: solid 2px black;
+    outline: none;
+}
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

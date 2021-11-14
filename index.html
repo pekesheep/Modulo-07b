@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funciones</title>
+    <link rel="stylesheet" href="site.css">
+</head>
+
+<body>
+
+    <header id="title">
+        <h1 id="main-header">Reserva Hotel</h1>
+        <h3>Marque las opciones deseadas</h3>
+    </header>
+    <div class="jusified-box">
+        <div class="select-room-box">
+            <select id="select-room" size="1" onChange="selectRoom()">
+                <option value="0">Tipo de habitación</option>
+                <option value="100">Standard</option>
+                <option value="120">Junior Suite</option>
+                <option value="150">Suite</option>
+            </select>
+        </div>
+        <div class="check-spa-box">
+            <input type="checkbox" id="check-spa" onclick="checkSpa()">
+            <span>Marque la casilla si desea Spa</span>
+        </div>
+        <div class="select-occupation-box">
+            <select id="select-occupation" size="1" onChange="selectOccupation()">
+                <option value="0">Seleccione ocupación</option>
+                <option value="0.75">Individual</option>
+                <option value="1">Doble</option>
+                <option value="1.25">Triple</option>
+            </select>
+        </div>
+        <div class="night-box">
+            <span>Número de noches: </span>
+            <input type="number" id="night" onBlur="inputNight()">
+        </div>
+        <div class="parking-box">
+            <span>Noches de parking: </span>
+            <input type="number" id="parking" onBlur="inputParking()">
+        </div>
+        <div class="total-price-box">
+            <span id="total-price"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
