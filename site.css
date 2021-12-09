@@ -1,38 +1,78 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+
 }
 
 #title {
     text-align: center;
 }
 
-div{
-    margin: 10px;
+main {
+    margin: auto;
+    width: 30%;
 }
-.jusified-box {
+
+.list-input-container {
+    display: flex;
+
+}
+
+#product-input-container {
+    display: flex;
+    margin: auto 0px auto auto;
+    flex-direction: column;
+}
+
+.product-input {
+    width: 30px;
+    margin: 2px;
+}
+
+
+.product-list-description {
+
+    text-align: left;
+    height: 20px;
+    margin: 5px;
+
+}
+
+.total-container {
     text-align: center;
     margin: auto;
-    width: 50%;
 }
 
-input[type=number] {
-    /* Estilo de texto de input */
-    font-size: 24px;
+#button-calculate {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px;
+    width: 100%;
     text-align: center;
-    /* Estilo de caja input */
-    width: 5%;
-    justify-content: center;
-    align-items: center;
-     border: solid 1px gray;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: auto;
+    cursor: pointer;
 }
 
-input[type=number]:focus {
-    border: solid 2px black;
-    outline: none;
+#button-calculate:disabled {
+
+    background-color: #89b18a;
+
 }
 
-input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+.total-result {
+    display: flex;
+    justify-content: right;
+}
+
+h3 {
+    padding: 0 0 0 20px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }

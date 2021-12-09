@@ -12,42 +12,35 @@
 <body>
 
     <header id="title">
-        <h1 id="main-header">Reserva Hotel</h1>
-        <h3>Marque las opciones deseadas</h3>
+        <h1 id="main-header">Carrito de la compra</h1>
     </header>
-    <div class="jusified-box">
-        <div class="select-room-box">
-            <select id="select-room" size="1" onChange="selectRoom()">
-                <option value="0">Tipo de habitación</option>
-                <option value="100">Standard</option>
-                <option value="120">Junior Suite</option>
-                <option value="150">Suite</option>
-            </select>
+    <main>
+        <div class="list-input-container">
+            <div id="product-list-container"> </div>
+            <div id="product-input-container"> </div>
         </div>
-        <div class="check-spa-box">
-            <input type="checkbox" id="check-spa" onclick="checkSpa()">
-            <span>Marque la casilla si desea Spa</span>
+
+
+        <div class="total-container">
+            <div>
+                <button id="button-calculate" onclick="calcTotal(products); ">Calcular</button>
+            </div>
+            <div class="total-result">
+                <h4>Subtotal: </h4>
+                <h3 id="subtotal"></h3>
+            </div>
+            <div class="total-result">
+                <h4>IVA: </h4>
+                <h3 id="taxes"></h3>
+            </div>
+            <div class="total-result">
+                <h4>TOTAL: </h4>
+                <h3 id="total"></h3>
+            </div>
         </div>
-        <div class="select-occupation-box">
-            <select id="select-occupation" size="1" onChange="selectOccupation()">
-                <option value="0">Seleccione ocupación</option>
-                <option value="0.75">Individual</option>
-                <option value="1">Doble</option>
-                <option value="1.25">Triple</option>
-            </select>
-        </div>
-        <div class="night-box">
-            <span>Número de noches: </span>
-            <input type="number" id="night" onBlur="inputNight()">
-        </div>
-        <div class="parking-box">
-            <span>Noches de parking: </span>
-            <input type="number" id="parking" onBlur="inputParking()">
-        </div>
-        <div class="total-price-box">
-            <span id="total-price"></span>
-        </div>
-    </div>
+
+    </main>
+
 
     <script src="script.js"></script>
 </body>
