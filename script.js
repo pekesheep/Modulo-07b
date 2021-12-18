@@ -1,122 +1,137 @@
-// Constantes.
-const REGULAR_TYPE = 21;
-const LOWER_TYPE = 4;
-const EXEMPT_TYPE = 0;
-// Entrada.
-var products = [
-  {
-    description: "Goma de borrar",
-    price: 0.25,
-    tax: LOWER_TYPE,
-    stock: 2,
-    units: 0,
-  },
-  {
-    description: "Lápiz H2",
-    price: 0.4,
-    tax: LOWER_TYPE,
-    stock: 5,
-    units: 0,
-  },
-  {
-    description: "Cinta rotular",
-    price: 9.3,
-    tax: REGULAR_TYPE,
-    stock: 2,
-    units: 0,
-  },
-  {
-    description: "Papelera plástico",
-    price: 2.75,
-    tax: REGULAR_TYPE,
-    stock: 5,
-    units: 0,
-  },
-  {
-    description: "Escuadra",
-    price: 8.4,
-    tax: REGULAR_TYPE,
-    stock: 3,
-    units: 0,
-  },
-  {
-    description: "Pizarra blanca",
-    price: 5.95,
-    tax: REGULAR_TYPE,
-    stock: 2,
-    units: 0,
-  },
-  {
-    description: "Afilador",
-    price: 1.2,
-    tax: LOWER_TYPE,
-    stock: 10,
-    units: 0,
-  },
-  {
-    description: "Libro ABC",
-    price: 19,
-    tax: EXEMPT_TYPE,
-    stock: 2,
-    units: 0,
-  },
-];
+const BILLS = [200, 100, 50, 20, 10, 5, 2, 1, 0.50, 0.20, 0.10, 0.05, 0.02, 0.01];
+var cashDrawer = [{
+  money: 200,
+  quant: 1
+},
+{
+  money: 100,
+  quant: 2
+},
+{
+  money: 50,
+  quant: 3
+},
+{
+  money: 20,
+  quant: 1
+},
+{
+  money: 10,
+  quant: 10
+},
+{
+  money: 5,
+  quant: 2
+},
+{
+  money: 2,
+  quant: 3
+},
+{
+  money: 1,
+  quant: 4
+},
+{
+  money: 0.50,
+  quant: 10
+},
+{
+  money: 0.20,
+  quant: 5
+},
+{
+  money: 0.10,
+  quant: 3
+},
+{
+  money: 0.05,
+  quant: 2
+},
+{
+  money: 0.02,
+  quant: 1
+},
+{
+  money: 0.01,
+  quant: 14
+}];
 
-//Hay mucho que pulir porque el control de entrada de si los input valen 0 o no, no está bien del todo.
-//Si haces un test metiendo valores y borrando se vuelve loco el programa :'(
+//Botones deshabilitados si no hay inputs
+activateBtn = () => {
+  document.getElementById("button-calculate").disabled = (document.getElementById("total").value === "" || document.getElementById("payed").value === "");
+}
 
-var showProducts = (productList) => {
-  var container = document.getElementById("product-list-container");
-  var inputContainer = document.getElementById("product-input-container");
-
-  var createProduct = (product) => {
-    var description = document.createElement("div");
-    var quantity = document.createElement("input");
-
-    description.innerText = `${product.description} - ${product.price} €/ud.`;
-
-    description.setAttribute("class", "product-list-description");
-    quantity.setAttribute("type", "number");
-    quantity.setAttribute("class", "product-input");
-    quantity.addEventListener("change", (event) => {
-      product.units = event.target.valueAsNumber;
-
-      document.getElementById("button-calculate").disabled =
-        product.units == 0 ? true : false;
-    });
-
-    container.appendChild(description);
-    inputContainer.appendChild(quantity);
-  };
-
-  for (var product of productList) {
-    createProduct(product);
+//Funcion para limpiar la pantalla
+var clearSpans = () => {
+  var clearSpans = document.getElementById("result-box");
+  var description = document.createElement("span");
+  clearSpans.appendChild(description);
+  while (clearSpans.firstChild) {
+    clearSpans.removeChild(clearSpans.lastChild);
   }
-};
+}
 
-showProducts(products);
-
-var calcTotal = (productList) => {
-  var allSubtotal = 0;
-  var allTaxes = 0;
-  var allTotal = 0;
-  var subtotal = 0;
-  var taxes = 0;
+//Comprobar el máximo cambio de la caja
+var maxBills = (arr) => {
   var total = 0;
-
-  for (var product of productList) {
-    var subtotal = product.units * product.price;
-    var taxes = (subtotal * product.tax) / 100;
-    var total = subtotal + taxes;
-
-    allSubtotal = allSubtotal + subtotal;
-    allTaxes = allTaxes + taxes;
-    allTotal = allTotal + total;
+  for (var i = 0; i < arr.length; i++) {
+    total += arr[i].money * arr[i].quant;
   }
-  document.getElementById("subtotal").innerHTML = allSubtotal.toFixed(2) + "€";
-  document.getElementById("taxes").innerHTML = allTaxes.toFixed(2) + "€";
-  document.getElementById("total").innerHTML = allTotal.toFixed(2) + "€";
-};
-// product.units == 0 ? 0 : product.units;
-// var disableButton = product.units == 0 ? true : false;
-// document.getElementById("button-calculate").disabled = disableButton;
+  console.log("Dinero en la caja", total);
+  return total;
+}
+
+
+var calculate = () => {
+  clearSpans();
+
+  var payed = document.getElementById("payed").value;
+  var total = document.getElementById("total").value;
+  var rest = payed - total;
+
+  if (rest < 0) {
+    document.getElementById("result").className = "error-result";
+    return document.getElementById("result").innerHTML = "No se ha pagado todo el importe";
+  }
+  else if (maxBills(cashDrawer) < rest) {
+    document.getElementById("result").className = "error-result";
+    return document.getElementById("result").innerHTML = "No hay tanto cambio en la caja";
+  }
+  document.getElementById("result").innerHTML = ("A devolver: " + rest.toFixed(2) + " €");
+  document.getElementById("result").className = "";
+
+
+  changeBills(rest, BILLS, cashDrawer);
+
+}
+
+
+var changeBills = (rest, BILLS, cashDrawer) => {
+
+  var i = 0;
+  var devolution = 0;
+  for (; i < BILLS.length; i++) {
+    devolution = rest / BILLS[i];  
+    var devolutionRounded = Math.floor(devolution);
+    
+    if (devolutionRounded >= 1 && cashDrawer[i].quant !== 0) {
+     
+      //Quitamos los billetes de la caja que hemos creado hasta que no haya más existencias antes de pasar al siguiente billete.
+      devolutionRounded = (devolutionRounded >= cashDrawer[i].quant) ? devolutionRounded = cashDrawer[i].quant : devolutionRounded;      
+
+
+      var container = document.getElementById("result-box");
+      var description = document.createElement("span");
+      description.setAttribute("class", "result-style");
+
+      if (devolutionRounded === 1 && i >= 6) description.innerText = (devolutionRounded + " moneda de " + BILLS[i] + " €");
+      else if (devolutionRounded > 1 && i >= 6) description.innerText = (devolutionRounded + " monedas de " + BILLS[i] + " €");
+      else if (devolutionRounded === 1 && i < 6) description.innerText = (devolutionRounded + " billete de " + BILLS[i] + " €");
+      else if (devolutionRounded > 1 && i < 6) description.innerText = (devolutionRounded + " billetes de " + BILLS[i] + " €");
+
+      container.appendChild(description);
+      rest = rest - devolutionRounded * BILLS[i];
+
+    }
+  }
+}

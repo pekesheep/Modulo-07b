@@ -9,66 +9,79 @@ body {
 
 main {
     margin: auto;
-    width: 30%;
+    width: 20%;
 }
 
-.list-input-container {
-    display: flex;
-
-}
-
-#product-input-container {
-    display: flex;
-    margin: auto 0px auto auto;
-    flex-direction: column;
-}
-
-.product-input {
-    width: 30px;
-    margin: 2px;
-}
-
-
-.product-list-description {
-
-    text-align: left;
-    height: 20px;
-    margin: 5px;
-
-}
-
-.total-container {
-    text-align: center;
+.importe-total, .cantidad-pagada {
     margin: auto;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 10px 0px 10px 0px;
+}
+
+#total, #payed {
+    width: 50px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    border: none;
+    border-bottom: 1.5px solid grey;
+    text-align: right;
+}
+
+#total:focus, #payed:focus {
+    outline: none;
+    border-bottom: 2px solid;
+}
+
+#result-box {
+    padding-top: 55px;
+    display: block;
+}
+
+#result {
+    text-align: right;
+   padding-top: 55px;
+}
+
+.result-style {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    font-size: 20px;
+
+}
+
+.error-result {
+    color: red;
 }
 
 #button-calculate {
+    margin-top: 20px;
     background-color: #4CAF50;
+    float: right;
     border: none;
     color: white;
-    padding: 15px;
-    width: 100%;
+    padding: 10px;
+    width: 110px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     font-size: 16px;
-    margin: auto;
     cursor: pointer;
 }
 
 #button-calculate:disabled {
-
     background-color: #89b18a;
-
+    cursor: auto;
 }
 
-.total-result {
-    display: flex;
-    justify-content: right;
+#button-calculate:hover:enabled {
+    background-color: #29612b;
 }
 
-h3 {
-    padding: 0 0 0 20px;
+#button-calculate:active:enabled {
+    background-color: #1f4720;
 }
 
 input::-webkit-outer-spin-button,
